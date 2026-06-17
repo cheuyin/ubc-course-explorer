@@ -1,0 +1,351 @@
+### Variables
+@baseUrl = http://localhost:4321/api
+
+### ========== DATASET UPLOAD ==========
+
+### Upload facilities dataset
+POST {{baseUrl}}/v2/datasets
+Content-Type: multipart/form-data; boundary=----MySuperBoundary
+
+------MySuperBoundary
+Content-Disposition: form-data; name="kind"
+
+facilities
+------MySuperBoundary
+Content-Disposition: form-data; name="archive"; filename="campus.zip"
+Content-Type: application/zip
+
+< test/test_data/campus.zip
+------MySuperBoundary--
+
+### Check upload status
+GET {{baseUrl}}/v2/datasets/upload_1773780371178
+
+### ========== FACILITIES SEARCH ==========
+
+### Basic: rooms with more than 300 seats
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "GT": { "seats": 300 }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "name", "number", "seats"],
+      "ORDER": {
+        "dir": "UP",
+        "keys": ["seats", "number"]
+      }
+    }
+  }
+}
+
+### Wildcard: buildings starting with "A"
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "IS": { "building": "A*" }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "name", "number", "seats"]
+    }
+  }
+}
+
+### AND filter: large rooms in specific building
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "AND": [
+        { "IS": { "building": "WOOD" } },
+        { "GT": { "seats": 100 } }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "seats", "type"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["seats"]
+      }
+    }
+  }
+}
+
+### OR filter: rooms in HEBB or CHEM
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "OR": [
+        { "IS": { "building": "HEBB" } },
+        { "IS": { "building": "CHEM" } }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "seats", "type"],
+      "ORDER": {
+        "dir": "UP",
+        "keys": ["building", "seats"]
+      }
+    }
+  }
+}
+
+### NOT filter: rooms NOT in WOOD
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "AND": [
+        { "NOT": { "IS": { "building": "WOOD" } } },
+        { "GT": { "seats": 400 } }
+      ]
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "seats"]
+    }
+  }
+}
+
+### Empty WHERE: all rooms (may hit 5000 limit)
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "seats"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["seats"]
+      }
+    }
+  }
+}
+
+### Wildcard: furniture type containing "Movable"
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "IS": { "furniture": "*Movable*" }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "furniture", "seats"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["seats"]
+      }
+    }
+  }
+}
+
+### EQ filter: rooms with exactly 200 seats
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "EQ": { "seats": 200 }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "number", "seats", "name"]
+    }
+  }
+}
+
+### ========== TRANSFORMATIONS ==========
+
+### Group by building, compute max seats
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": ["building", "maxSeats"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["maxSeats"]
+      }
+    },
+    "TRANSFORMATIONS": {
+      "GROUP": ["building"],
+      "APPLY": [
+        { "maxSeats": { "MAX": "seats" } }
+      ]
+    }
+  }
+}
+
+### Group by building, compute min seats (buildings starting with A)
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "IS": { "building": "A*" }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "minSeats"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["minSeats", "building"]
+      }
+    },
+    "TRANSFORMATIONS": {
+      "GROUP": ["building"],
+      "APPLY": [
+        { "minSeats": { "MIN": "seats" } }
+      ]
+    }
+  }
+}
+
+### Group by room type, compute average seats and count
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": ["type", "avgSeats", "roomCount"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["avgSeats"]
+      }
+    },
+    "TRANSFORMATIONS": {
+      "GROUP": ["type"],
+      "APPLY": [
+        { "avgSeats": { "AVG": "seats" } },
+        { "roomCount": { "COUNT": "number" } }
+      ]
+    }
+  }
+}
+
+### Group by building and type, sum seats
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "GT": { "seats": 50 }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "type", "totalSeats"],
+      "ORDER": {
+        "dir": "DOWN",
+        "keys": ["totalSeats"]
+      }
+    },
+    "TRANSFORMATIONS": {
+      "GROUP": ["building", "type"],
+      "APPLY": [
+        { "totalSeats": { "SUM": "seats" } }
+      ]
+    }
+  }
+}
+
+### ========== ERROR CASES ==========
+
+### Missing kind
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "query": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": ["building"]
+    }
+  }
+}
+
+### Missing WHERE
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "OPTIONS": {
+      "COLUMNS": ["building"]
+    }
+  }
+}
+
+### Invalid field in COLUMNS
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {},
+    "OPTIONS": {
+      "COLUMNS": ["building", "fakeField"]
+    }
+  }
+}
+
+### Mixing course and facilities fields
+POST {{baseUrl}}/v2/search
+Content-Type: application/json
+
+{
+  "kind": "facilities",
+  "query": {
+    "WHERE": {
+      "GT": { "avg": 90 }
+    },
+    "OPTIONS": {
+      "COLUMNS": ["building", "avg"]
+    }
+  }
+}
+
+### ========== BUILDINGS ENDPOINTS ==========
+
+### List all buildings
+GET {{baseUrl}}/v2/buildings
+
+### Get a specific building
+GET {{baseUrl}}/v2/buildings/WOOD
+
+### Get rooms for a building
+GET {{baseUrl}}/v2/buildings/WOOD/rooms

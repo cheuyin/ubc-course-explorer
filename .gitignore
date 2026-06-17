@@ -24,6 +24,5 @@ dist/
 .env
 *.log
 api-spec.json
-test.http
 *.zip
 !backend/test/test_data/*
