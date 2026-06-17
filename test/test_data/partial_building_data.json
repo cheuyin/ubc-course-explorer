@@ -1,0 +1,121 @@
+[
+	{
+		"id": "ACU",
+		"name": "Acute Care Unit",
+		"address": "2211 Wesbrook Mall",
+		"link": "./campus/discover/buildings-and-classrooms/ACU.htm",
+		"lat": 49.26408,
+		"lon": -123.24605,
+		"rooms": []
+	},
+	{
+		"id": "ALRD",
+		"name": "Allard Hall (LAW)",
+		"address": "1822 East Mall",
+		"link": "./campus/discover/buildings-and-classrooms/ALRD.htm",
+		"lat": 49.2699,
+		"lon": -123.25318,
+		"rooms": [
+			{
+				"id": "ALRD_105",
+				"buildingId": "ALRD",
+				"roomNumber": "105",
+				"seats": 94,
+				"furnitureType": "Classroom-Fixed Tables/Movable Chairs",
+				"roomType": "Case Style",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/ALRD-105"
+			},
+			{
+				"id": "ALRD_112",
+				"buildingId": "ALRD",
+				"roomNumber": "112",
+				"seats": 20,
+				"furnitureType": "Classroom-Movable Tables & Chairs",
+				"roomType": "Open Design General Purpose",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/ALRD-112"
+			},
+			{
+				"id": "ALRD_113",
+				"buildingId": "ALRD",
+				"roomNumber": "113",
+				"seats": 20,
+				"furnitureType": "Classroom-Movable Tables & Chairs",
+				"roomType": "Open Design General Purpose",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/ALRD-113"
+			},
+			{
+				"id": "ALRD_121",
+				"buildingId": "ALRD",
+				"roomNumber": "121",
+				"seats": 50,
+				"furnitureType": "Classroom-Fixed Tables/Movable Chairs",
+				"roomType": "Case Style",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/ALRD-121"
+			},
+			{
+				"id": "ALRD_B101",
+				"buildingId": "ALRD",
+				"roomNumber": "B101",
+				"seats": 44,
+				"furnitureType": "Classroom-Fixed Tables/Movable Chairs",
+				"roomType": "Open Design General Purpose",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/ALRD-B101"
+			}
+		]
+	},
+	{
+		"id": "ACEN",
+		"name": "Asian Centre",
+		"address": "1871 West Mall",
+		"link": "./campus/discover/buildings-and-classrooms/ACEN.htm",
+		"lat": 49.26684,
+		"lon": -123.25858,
+		"rooms": []
+	},
+	{
+		"id": "AAC",
+		"name": "Audain Art Centre",
+		"address": "6398 University Boulevard",
+		"link": "./campus/discover/buildings-and-classrooms/AAC.htm",
+		"lat": 49.26387,
+		"lon": -123.25473,
+		"rooms": []
+	},
+	{
+		"id": "CHBE",
+		"name": "Chemical and Biological Engineering Building",
+		"address": "2360 East Mall V6T 1Z3",
+		"link": "./campus/discover/buildings-and-classrooms/CHBE.htm",
+		"lat": 49.26228,
+		"lon": -123.24718,
+		"rooms": [
+			{
+				"id": "CHBE_101",
+				"buildingId": "CHBE",
+				"roomNumber": "101",
+				"seats": 200,
+				"furnitureType": "Classroom-Fixed Tables/Movable Chairs",
+				"roomType": "Tiered Large Group",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/CHBE-101"
+			},
+			{
+				"id": "CHBE_102",
+				"buildingId": "CHBE",
+				"roomNumber": "102",
+				"seats": 94,
+				"furnitureType": "Classroom-Fixed Tables/Movable Chairs",
+				"roomType": "Tiered Large Group",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/CHBE-102"
+			},
+			{
+				"id": "CHBE_103",
+				"buildingId": "CHBE",
+				"roomNumber": "103",
+				"seats": 60,
+				"furnitureType": "Classroom-Movable Tables & Chairs",
+				"roomType": "Open Design General Purpose",
+				"href": "http://students.ubc.ca/campus/discover/buildings-and-classrooms/room/CHBE-103"
+			}
+		]
+	}
+]

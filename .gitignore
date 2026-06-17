@@ -1,0 +1,29 @@
+# JetBrains IDE
+.idea/
+
+# Node
+node_modules/
+coverage/
+dist/
+
+# Yarn
+.yarn/
+
+# Persist Dir
+/data/
+/frontend/demo_data/
+
+# Frontend build output
+/frontend/public/
+
+# Coverage Reports
+.nyc_output/
+
+# Normal Things
+.DS_Store
+.env
+*.log
+api-spec.json
+test.http
+*.zip
+!test/test_data/*

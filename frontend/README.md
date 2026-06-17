@@ -1,0 +1,22 @@
+# Data Insights Visualization
+
+## Chart 1: Number of students enrolled in introductory CPSC courses over years
+
+__Description:__ This bar chart displays the number of students enrolled in typical first year/introductory CPSC courses that students at UBC can take. Hovering over the bars causes a tooltip to appear with the exact enrollment numbers. Note that only CPSC 110 is required to enter the specialization in second year (and thus some students choose to take them in second year). Also, note that some sections of CPSC 110 and 210 may have been missing from the years 2007-2009 in the dataset provided.  
+
+__Use case:__ This chart displays historic trends in enrollments in first year CPSC courses, which can be used to predict future class sizes, and allow the department to plan out the number of sections for these courses in the future. Furthermore, CPSC 110 (and CPSC 121 + 210 to some extent) is typically taken by first students looking to enter the CPSC major or take future CPSC courses (students looking to take a CPSC minor). Therefore, this chart can also show student interest in CPSC specializations, which is important for the university to understand for future resource allocation and course planning. Notably, enrollment in CPSC has almost tripled from 2010-2016, suggesting that the interest in CPSC courses and the major has also significantly increased.  
+
+## Chart 2: Average grades in first year calculus courses over the years
+__Description__: This line graph displays the average grades for first year calculus courses taken throughout the years 2007-2016. Courses can be filtered/selected to only display certain courses if desired, and hovering over a specific year on the graph causes a tooltip to appear with the exact averages of the courses shown on the graph. Note that some courses in the dataset did not have data provided for some of the years.  
+
+__Use case:__ UBC offers a variety of first year calculus courses - MATH 100 and MATH 101 are standard calculus courses meant to be taken by students who have completed Pre-calculus 12 with an 80% or have other calculus experience. MATH 110, 180, and 184 are equivalent to MATH 100, but with more lecture time and tutorial time - for students with less experience with calculus. MATH 120 and 121 are enriched calculus courses, meant for honours math students or those who excelled previously in calculus. MATH 102, 103, and 104 are all variants of MATH 100, just with applications towards life sciences, engineering, or commerce. The variety in first year calculus courses offered reflects the different levels of knowledge that students taking these courses have, and the differences in supports that they need to be successful in these courses. The historical averages of these courses can be taken into consideration by Math department to determine future resource allocation (TAs, professors, and other supports), as well as future course planning. For example, when looking at the historical averages, MATH 110, 180, and 184 tend to be the lowest of the courses, suggesting that these students may still need more help or different forms of support.  
+
+## Chart 3: Geographical clustering of buildings at UBC
+__Description:__ A zoomable and moveable map (using OpenStreetMap) with small blue circles representing different buildings in the facilities dataset provided. Hovering over a circle causes a tooltip with the name of the building to appear. 
+
+__Use case:__ This map shows the geographical clustering of buildings at UBC, which can be used for course planning (ideally sets of classes that students typically take should not be located at opposite sides of campus), or considering the concentration of buildings for future construction plans. For example, when planning construction of a new biomedical research facility, it makes sense to have it located close to other health science and biological research buildings.  
+
+## Chart 4: Proportions of room types in buildings at UBC
+__Description__: This pie chart shows the proportions of different types of rooms in the buildings at UBC. Hovering over a segment of the pie chart causes a tooltip to pop up with the exact number of rooms and proportion, and displays the room type in the middle of the chart. 
+
+__Use case:__ This pie chart can be used by the university to better understand the current makeup of buildings and classrooms at UBC and for future planning in construction of new buildings. 

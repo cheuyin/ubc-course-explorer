@@ -1,0 +1,237 @@
+[
+		{
+			"id": "cpsc310",
+			"title": "Software Engineering",
+			"dept": "cpsc",
+			"code": "310",
+			"sections": [
+				{
+					"id": "97453",
+					"instructor": "Reid, Holmes",
+					"year": 2020,
+					"avg": 85.3,
+					"pass": 120,
+					"fail": 2,
+					"audit": 1,
+					"courseId": "cpsc310"
+				},
+				{
+					"id": "83211",
+					"instructor": "Doe, John",
+					"year": 2021,
+					"avg": 78.1,
+					"pass": 115,
+					"fail": 15,
+					"audit": 0,
+					"courseId": "cpsc310"
+				}
+			]
+		},
+		{
+			"id": "cpsc210",
+			"title": "Software Construction",
+			"dept": "cpsc",
+			"code": "210",
+			"sections": [
+				{
+					"id": "11223",
+					"instructor": "Smith, Jane",
+					"year": 2019,
+					"avg": 88.5,
+					"pass": 200,
+					"fail": 5,
+					"audit": 3,
+					"courseId": "cpsc210"
+				},
+				{
+					"id": "44556",
+					"instructor": "Smith, Jane",
+					"year": 2020,
+					"avg": 89.2,
+					"pass": 210,
+					"fail": 2,
+					"audit": 5,
+					"courseId": "cpsc210"
+				}
+			]
+		},
+		{
+			"id": "math200",
+			"title": "Calculus III",
+			"dept": "math",
+			"code": "200",
+			"sections": [
+				{
+					"id": "99887",
+					"instructor": "Newton, Isaac",
+					"year": 1900,
+					"avg": 65.4,
+					"pass": 80,
+					"fail": 45,
+					"audit": 0,
+					"courseId": "math200"
+				},
+				{
+					"id": "22334",
+					"instructor": "Leibniz, Gottfried",
+					"year": 2022,
+					"avg": 74.2,
+					"pass": 140,
+					"fail": 20,
+					"audit": 4,
+					"courseId": "math200"
+				}
+			]
+		},
+		{
+			"id": "phys101",
+			"title": "Introduction to Physics",
+			"dept": "phys",
+			"code": "101",
+			"sections": [
+				{
+					"id": "10101",
+					"instructor": "Einstein, Albert",
+					"year": 2021,
+					"avg": 82.5,
+					"pass": 300,
+					"fail": 30,
+					"audit": 10,
+					"courseId": "phys101"
+				},
+				{
+					"id": "10102",
+					"instructor": "Curie, Marie",
+					"year": 2021,
+					"avg": 91.0,
+					"pass": 280,
+					"fail": 5,
+					"audit": 12,
+					"courseId": "phys101"
+				}
+			]
+		},
+		{
+			"id": "biol121",
+			"title": "Genetics and Evolution",
+			"dept": "biol",
+			"code": "121",
+			"sections": [
+				{
+					"id": "33441",
+					"instructor": "Darwin, Charles",
+					"year": 2020,
+					"avg": 76.8,
+					"pass": 150,
+					"fail": 25,
+					"audit": 0,
+					"courseId": "biol121"
+				},
+				{
+					"id": "33442",
+					"instructor": "Mendel, Gregor",
+					"year": 2022,
+					"avg": 84.1,
+					"pass": 165,
+					"fail": 10,
+					"audit": 2,
+					"courseId": "biol121"
+				}
+			]
+		},
+		{
+			"id": "econ101",
+			"title": "Principles of Microeconomics",
+			"dept": "econ",
+			"code": "101",
+			"sections": [
+				{
+					"id": "55661",
+					"instructor": "Smith, Adam",
+					"year": 2021,
+					"avg": 70.2,
+					"pass": 400,
+					"fail": 60,
+					"audit": 8,
+					"courseId": "econ101"
+				},
+				{
+					"id": "55662",
+					"instructor": "Keynes, John",
+					"year": 2022,
+					"avg": 79.5,
+					"pass": 380,
+					"fail": 20,
+					"audit": 5,
+					"courseId": "econ101"
+				}
+			]
+		},
+		{
+			"id": "psyc100",
+			"title": "Introductory Psychology",
+			"dept": "psyc",
+			"code": "100",
+			"sections": [
+				{
+					"id": "77881",
+					"instructor": "Freud, Sigmund",
+					"year": 2019,
+					"avg": 68.9,
+					"pass": 250,
+					"fail": 80,
+					"audit": 15,
+					"courseId": "psyc100"
+				},
+				{
+					"id": "77882",
+					"instructor": "Jung, Carl",
+					"year": 2020,
+					"avg": 81.4,
+					"pass": 310,
+					"fail": 15,
+					"audit": 20,
+					"courseId": "psyc100"
+				},
+				{
+					"id": "77883",
+					"instructor": "Skinner, B.F.",
+					"year": 2021,
+					"avg": 85.0,
+					"pass": 290,
+					"fail": 5,
+					"audit": 10,
+					"courseId": "psyc100"
+				}
+			]
+		},
+		{
+			"id": "engl112",
+			"title": "Strategies for University Writing",
+			"dept": "engl",
+			"code": "112",
+			"sections": [
+				{
+					"id": "55511",
+					"instructor": "Shakespeare, William",
+					"year": 1600,
+					"avg": 72.0,
+					"pass": 30,
+					"fail": 10,
+					"audit": 2,
+					"courseId": "engl112"
+				},
+				{
+					"id": "55512",
+					"instructor": "Austen, Jane",
+					"year": 2022,
+					"avg": 88.7,
+					"pass": 45,
+					"fail": 1,
+					"audit": 0,
+					"courseId": "engl112"
+				}
+			]
+		}
+	]
+
