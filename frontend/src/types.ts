@@ -1,40 +1,14 @@
-import { type ThemeOptions, createTheme } from "@mui/material";
-
-//stackoverflow.com/questions/50069724/how-to-add-custom-material-ui-palette-colors - used for reference
-declare module "@mui/material/styles" {
-	interface Palette {
-		custom: {
-			[key: string]: string;
-		};
-	}
-
-	interface PaletteOptions {
-		custom?: {
-			[key: string]: string;
-		};
-	}
-}
-
-declare module "@mui/material/Button" {
-	interface ButtonPropsColorOverrides {
-		custom: true;
-	}
-}
-
-export interface Organization {
-	id: string;
-	name: string;
-	links: {
-		self: string;
-		courses: string[]; // Course urls
-	};
-}
+// ===== Shared domain types =====
 
 export interface Course {
 	id: string;
 	title: string;
 	dept: string;
 	code: string;
+	links?: {
+		self: string;
+		sections: string;
+	};
 }
 
 export interface Section {
@@ -53,55 +27,34 @@ export interface Building {
 	address: string;
 	lat: number;
 	lon: number;
-	links: {
-        self: string,
-        rooms: string,
-    }
+	links?: {
+		self: string;
+		rooms: string;
+	};
 }
 
-export const LINE_COLOURS: Record<string, string> = {
-	"100": "#01722c",
-	"101": "#b9203eea",
-	"102": "#749c6f",
-	"103": "#df5250",
-	"104": "#9CCC65",
-	"105": "#E57373",
-	"110": "#2E7D32",
-	"120": "#FF4081",
-	"121": "#66BB6A",
-	"180": "#e67384",
-	"184": "#456941",
-};
+export interface Room {
+	id: string;
+	buildingId: string;
+	roomNumber: string;
+	roomType: string;
+	furnitureType: string;
+	href: string;
+	seats: number;
+}
 
-// Define a professional, academic color palette
-const themeOptions: ThemeOptions = {
-	palette: {
-		primary: {
-			main: "#ebebeb",
-			light: "#ffc7d3",
-		},
-		secondary: {
-			main: "#728b43cb",
-		},
-		background: {
-			default: "#c2cfb4", // Light gray background so Paper components pop
-			paper: "#ebebeb",
-		},
-		custom: {
-			...LINE_COLOURS,
-		},
-	},
-	typography: {
-		fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-		h6: {
-			fontWeight: 600,
-		},
-	},
-	shape: {
-		borderRadius: 8, // Slightly more rounded, modern corners
-	},
-};
+/**
+ * A course id is the department concatenated with the catalog code, e.g. "cpsc110".
+ * Search results only expose dept + code, so this is how we link back to a course page.
+ */
+export function courseIdOf(dept: string, code: string): string {
+	return `${dept}${code}`.toLowerCase();
+}
 
-const theme = createTheme(themeOptions);
-
-export default theme;
+/**
+ * Chart series colour. Resolves to a theme CSS variable (--chart-1..5) so charts
+ * track light/dark mode automatically. Recharts accepts `var(...)` as a colour.
+ */
+export function seriesColour(index: number): string {
+	return `var(--chart-${(index % 5) + 1})`;
+}

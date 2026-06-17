@@ -1,96 +1,26 @@
-import { useEffect, useState } from "react";
-import {
-	Box,
-	Typography,
-	Divider,
-	ThemeProvider,
-	CssBaseline,
-	AppBar,
-	Toolbar,
-	Container,
-	CircularProgress,
-} from "@mui/material";
-import StorageIcon from "@mui/icons-material/Storage";
-import CourseEnrollmentChart from "./components/CourseEnrollmentChart.tsx";
-import MathGradesChart from "./components/MathGradesChart.tsx";
-import theme from "./types.ts";
-import MapPlot from "./components/GeographicalClustering.tsx";
-import BuildingTypesChart from "./components/BuildingTypesChart.tsx";
-import api from "./api/axios.ts";
+import { Loader2 } from "lucide-react";
+import { RouterProvider } from "react-router-dom";
+import { useSeed } from "./hooks/queries";
+import router from "./router";
 
 function App() {
-	const [seeded, setSeeded] = useState(false);
+	const { isLoading, isError } = useSeed();
 
-	useEffect(() => {
-		api.get("/v2/seed").then(() => setSeeded(true)).catch((err) => {
-			console.error("Seed failed:", err);
-			setSeeded(true);
-		});
-	}, []);
-
-	if (!seeded) {
+	if (isLoading) {
 		return (
-			<Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-				<CircularProgress />
-			</Box>
+			<div className="flex h-screen flex-col items-center justify-center gap-3">
+				<Loader2 className="size-8 animate-spin text-primary" />
+				<p className="text-muted-foreground">Loading course data…</p>
+			</div>
 		);
 	}
 
-	return (
-		<ThemeProvider theme={theme}>
-			{/* CssBaseline kicks in the global background color and resets margins */}
-			<CssBaseline />
+	if (isError) {
+		// Seed failure is non-fatal — the data may already be loaded — so continue.
+		console.error("Seed failed; continuing with existing data.");
+	}
 
-			{/* The Header */}
-			<AppBar position="sticky" elevation={1} sx={{ bgcolor: "primary.main" }}>
-				<Toolbar>
-					<StorageIcon sx={{ mr: 2, color: "secondary.light" }} />
-					<Typography variant="h6" component="h1" sx={{ flexGrow: 1, letterSpacing: 0.5 }}>
-						InsightUBC Data Explorer
-					</Typography>
-				</Toolbar>
-			</AppBar>
-
-			{/* The Main Content Layout */}
-			<Container maxWidth="lg" sx={{ pt: 5, pb: 8 }}>
-				<Box sx={{ display: "block", flexDirection: "column", gap: 1 }}>
-					{/* Intro Text */}
-					<Box sx={{ mb: 3 }}>
-						<Typography variant="h4" color="text.primary" gutterBottom sx={{ fontWeight: "bold" }}>
-							Data Insights Visualization
-						</Typography>
-						<Typography variant="subtitle1" color="text.secondary">
-							Visualization and analysis of courses and facilities data at UBC
-						</Typography>
-					</Box>
-
-					<CourseEnrollmentChart />
-
-					<Divider sx={{ my: 4 }} />
-
-					<MathGradesChart />
-
-					<Divider sx={{ my: 4 }} />
-
-					<MapPlot />
-
-					<Divider sx={{ my: 4 }} />
-
-					<BuildingTypesChart />
-				</Box>
-			</Container>
-
-			{/* A Subtle Footer */}
-			<Box
-				component="footer"
-				sx={{ py: 3, textAlign: "center", mt: "auto", bgcolor: "#ebebeb", borderTop: "1px solid #e0e0e0" }}
-			>
-				<Typography variant="body2" color="text.secondary">
-					Built by Sophie and Stanley
-				</Typography>
-			</Box>
-		</ThemeProvider>
-	);
+	return <RouterProvider router={router} />;
 }
 
 export default App;
