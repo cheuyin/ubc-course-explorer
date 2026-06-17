@@ -1,5 +1,3 @@
-// entire file written with copilot assistance
-
 import { Router } from "express";
 import { CourseSectionRepository } from "../repositories/courseSectionRepository";
 import { createCourse, deleteCourse, listCourse, listCourses } from "../controllers/courseControllers";
@@ -14,5 +12,3 @@ export function courseRoutes(repo: CourseSectionRepository): Router {
 
 	return r;
 }
-
-// code above written with copilot assistance

@@ -1,4 +1,3 @@
-// below written by Claude
 import { Router } from "express";
 import { StatusCodes } from "http-status-codes";
 import { Repositories } from "../App";
@@ -13,7 +12,6 @@ export function seedRoutes(repos: Repositories, store: Store): Router {
 		try {
 			const seedDir = path.join(process.cwd(), "seed");
 
-			// below by Claude
 			const [courseRaw, buildingRaw] = await Promise.all([
 				fs.readFile(path.join(seedDir, "course_data.json"), "utf-8"),
 				fs.readFile(path.join(seedDir, "building_data.json"), "utf-8"),
@@ -22,7 +20,6 @@ export function seedRoutes(repos: Repositories, store: Store): Router {
 				store.writeCollection("courses", JSON.parse(courseRaw)),
 				store.writeCollection("buildings", JSON.parse(buildingRaw)),
 			]);
-			// above by Claude
 			await repos.courses.getCourses();
 			await repos.buildings.getBuildings();
 
@@ -35,4 +32,3 @@ export function seedRoutes(repos: Repositories, store: Store): Router {
 
 	return r;
 }
-// above written by Claude

@@ -22,11 +22,9 @@ export class CourseSectionRepository {
 		await this.store.writeCollection("courses", courses);
 	}
 
-	// Below code written by Gemini - Add a synchronization method to Model.ts
 	public async persistToDisk(): Promise<void> {
 		await this.writeData(this.data.courses);
 	}
-	// above code written by gemini
 
 	public async setCourseDataset(id: string, title: string, dept: string, code: string): Promise<Course> {
 		let course = await this.getCourseByIdAsync(id);
@@ -73,11 +71,9 @@ export class CourseSectionRepository {
 		this.data.courses = await this.readData();
 		return this.data.courses;
 	}
-	// copilot generated (AI) below - adapted from code previously written by copilot
 	public async getCourseByIdAsync(id: string): Promise<Course | undefined> {
 		return this.data.courses.find((c) => c.id === id);
 	}
-	// copilot generated (AI) above
 	public async setCourseAsync(id: string, title: string, dept: string, code: string): Promise<Course> {
 		let course = await this.getCourseByIdAsync(id);
 

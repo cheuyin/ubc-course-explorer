@@ -30,8 +30,6 @@ export type InvalidQueryError = {
 		| "IS asterisks can only be first or last character";
 };
 
-// below written with Gemini
-
 type FlatRecord = {
 	[key: string]: string | number;
 };
@@ -204,5 +202,3 @@ export async function executeSearch(req: Request, res: Response, repo: CourseSec
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unknown error during query execution" });
 	}
 }
-
-// above written with Gemini

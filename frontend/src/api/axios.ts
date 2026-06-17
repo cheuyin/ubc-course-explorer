@@ -1,4 +1,3 @@
-// AI GENERATED
 import axios from "axios";
 
 // Create a configured instance of axios
@@ -11,4 +10,3 @@ const api = axios.create({
 });
 
 export default api;
-// END AI GENERATED

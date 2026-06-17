@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { Repositories } from "../App";
 
-// below written by claude
 const FIELD_DEFS: Record<string, { mfields: string[]; sfields: string[] }> = {
 	course_offerings: {
 		mfields: ["avg", "pass", "fail", "audit", "year"],
@@ -21,7 +20,6 @@ function isOtherKindField(field: string, kind: string): boolean {
 		.filter(([k]) => k !== kind)
 		.some(([, def]) => def.mfields.includes(field) || def.sfields.includes(field));
 }
-// above written by claude
 
 type ValidationErrors = {
 	error: string;
@@ -61,8 +59,6 @@ export type InvalidQueryError = {
 		| "applykey cannot be empty or contain underscore";
 };
 
-// below written with Gemini
-
 type FlatRecord = {
 	[key: string]: string | number;
 };
@@ -71,7 +67,6 @@ const MAX_RESULTS = 5000;
 
 // ===== 1. JSON Structural Validation =====
 
-// below refactored by claude
 function validateJSON(body: any): ValidationErrors | null {
 	const errors: ValidationErrors = { error: "Validation failed", fields: {} };
 
@@ -94,16 +89,13 @@ function validateJSON(body: any): ValidationErrors | null {
 
 	return Object.keys(errors.fields).length > 0 ? errors : null;
 }
-// above refactored by claude
 
 // ===== 2. EBNF Logic Validation =====
 
-// below refactored by claude
 function validateEBNF(query: any, kind: string, mfields: string[], sfields: string[]): InvalidQueryError | null {
 	if (!("WHERE" in query)) return createError("Missing WHERE");
 	if (!("OPTIONS" in query)) return createError("Missing OPTIONS");
 
-	// below written by claude
 	let applyKeys: string[] = [];
 	if ("TRANSFORMATIONS" in query) {
 		const tErr = validateTransformations(query.TRANSFORMATIONS, kind, mfields, sfields);
@@ -123,20 +115,17 @@ function validateEBNF(query: any, kind: string, mfields: string[], sfields: stri
 			}
 		}
 	}
-	// above written by claude
 
 	const whereError = validateFilter(query.WHERE, kind, mfields, sfields);
 	if (whereError) return createError(whereError);
 
 	return null;
 }
-// above refactored by claude
 
 function createError(message: InvalidQueryError["message"]): InvalidQueryError {
 	return { error: "Invalid query", message };
 }
 
-// below refactored by claude
 function validateOptions(
 	options: any,
 	kind: string,
@@ -164,7 +153,6 @@ function validateOptions(
 		}
 	}
 
-	// below written by claude
 	if ("ORDER" in options) {
 		const order = options.ORDER;
 		if (typeof order === "string") {
@@ -187,12 +175,10 @@ function validateOptions(
 			return "ORDER must be a key in COLUMNS";
 		}
 	}
-	// above written by claude
 
 	return null;
 }
 
-// below written by claude
 const VALID_APPLY_TOKENS = ["MAX", "MIN", "AVG", "COUNT", "SUM"];
 
 function validateTransformations(
@@ -242,7 +228,6 @@ function validateTransformations(
 
 	return null;
 }
-// above written by claude
 
 function validateFilter(
 	f: any,
@@ -286,7 +271,6 @@ function validateFilter(
 	}
 	return "WHERE must be an object with at most one FILTER";
 }
-// above refactored by claude
 
 // ===== 3. Execution & Filtering =====
 
@@ -316,7 +300,6 @@ function applyFilter(r: FlatRecord, f: any): boolean {
 	return false;
 }
 
-// below refactored by claude
 async function getFlatRecords(kind: string, repos: Repositories): Promise<FlatRecord[]> {
 	if (kind === "course_offerings") {
 		const records: FlatRecord[] = [];
@@ -350,7 +333,6 @@ async function getFlatRecords(kind: string, repos: Repositories): Promise<FlatRe
 	return [];
 }
 
-// below written by claude
 function sortResults(records: FlatRecord[], order: string | { dir: string; keys: string[] } | undefined): void {
 	if (!order) return;
 	if (typeof order === "string") {
@@ -366,9 +348,7 @@ function sortResults(records: FlatRecord[], order: string | { dir: string; keys:
 		});
 	}
 }
-// above written by claude
 
-// below written by claude
 function applyTransformations(records: FlatRecord[], group: string[], apply: any[]): FlatRecord[] {
 	const groups = new Map<string, FlatRecord[]>();
 	for (const r of records) {
@@ -406,7 +386,6 @@ function applyTransformations(records: FlatRecord[], group: string[], apply: any
 	}
 	return results;
 }
-// above written by claude
 
 function projectColumns(records: FlatRecord[], columns: string[]): FlatRecord[] {
 	return records.map((r) => Object.fromEntries(columns.map((col) => [col, r[col]])));
@@ -441,7 +420,6 @@ export async function executeSearch(req: Request, res: Response, repos: Reposito
 			}
 		}
 
-		// below written by claude
 		let processed = matched;
 		if (TRANSFORMATIONS) {
 			processed = applyTransformations(matched, TRANSFORMATIONS.GROUP, TRANSFORMATIONS.APPLY);
@@ -449,12 +427,8 @@ export async function executeSearch(req: Request, res: Response, repos: Reposito
 
 		sortResults(processed, ORDER);
 		const results = projectColumns(processed, COLUMNS);
-		// above written by claude
 		res.status(StatusCodes.OK).json(results);
 	} catch {
 		res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: "Unknown error during query execution" });
 	}
 }
-// above refactored by claude
-
-// above written with Gemini

@@ -11,15 +11,13 @@ import { uploadRoutes } from "./routes/upload";
 import { buildingRoutes } from "./routes/buildings";
 import { roomRoutes } from "./routes/rooms";
 import { searchRoutesV1 } from "./routes/v1/searchV1";
-import { seedRoutes } from "./routes/seed"; // below written by Claude
+import { seedRoutes } from "./routes/seed";
 import { createFileStore } from "./storage/fileStore";
 
-// below by Claude
 export interface Repositories {
 	courses: CourseSectionRepository;
 	buildings: BuildingRoomRepository;
 }
-// above by Claude
 
 /**
  * Express application.
@@ -42,7 +40,6 @@ export type AppConfig = {
 /**
  * Initializes the application.
  */
-// refactored with copilot to match lint requirements (35 lines or less for a function)
 export async function createApp(config: AppConfig): Promise<Application> {
 	const app = express();
 
@@ -70,7 +67,7 @@ export async function createApp(config: AppConfig): Promise<Application> {
 	app.use("/api/v2/buildings", buildingRoutes(repos.buildings));
 	app.use("/api/v2/buildings/:buildingId/rooms", roomRoutes(repos.buildings));
 	app.use("/api/v2/search", searchRoutes(repos));
-	app.use("/api/v2/seed", seedRoutes(repos, store)); // written by Claude
+	app.use("/api/v2/seed", seedRoutes(repos, store));
 
 	app.get("/api", (req, res) => {
 		res.send("App is running!");

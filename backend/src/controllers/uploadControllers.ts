@@ -8,7 +8,6 @@ import {
 } from "./processCourseOfferings";
 import { JobStatsFacilities, startProcessingFacilities, createNewJobFacilities } from "./processFacilities";
 
-// below coded by Claude
 interface BaseJob {
 	id: string;
 	status: "processing" | "completed" | "failed";
@@ -28,7 +27,6 @@ export interface FacilitiesJob extends BaseJob {
 export type Job = CourseOfferingsJob | FacilitiesJob;
 
 export type JobsTracker = Map<string, Job>;
-// above coded by Claude
 
 // In-memory store for upload jobs
 const jobsTracker: JobsTracker = new Map<string, Job>();

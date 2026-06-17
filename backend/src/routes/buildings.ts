@@ -1,11 +1,9 @@
-// file written by Sophie, but using other router files that were written by Gemini as reference
 import { Router } from "express";
 import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
 import { createBuilding, deleteBuilding, listBuilding, listBuildings } from "../controllers/buildingControllers";
 import { handleErrors } from "../middleware/handleErrors";
 import { validateBuildingBody, validateBuildingId, validateQuery } from "../middleware/validation";
 
-// refactored w/ copilot
 export function buildingRoutes(repo: BuildingRoomRepository): Router {
 	const r = Router({ mergeParams: true });
 

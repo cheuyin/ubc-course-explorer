@@ -79,7 +79,6 @@ async function getGrades() {
 	return grades;
 }
 
-// debugged w/ gemini
 // https://recharts.github.io/en-US/examples/LineChartHasMultiSeries/
 export default function MathGradesChart() {
 	const [data, setData] = useState<CourseAvgs[] | null>(null);
@@ -88,7 +87,6 @@ export default function MathGradesChart() {
 		getGrades().then(setData);
 	}, []);
 
-	// created with copilot
 	const [visible, setVisible] = useState<Record<string, boolean>>({});
     type ButtonVariant = "text" | "contained" | "outlined";
 	const [variant, setVariant] = useState<Record<string, ButtonVariant>>({});
@@ -116,7 +114,6 @@ export default function MathGradesChart() {
 			}));
 		}
 	};
-	// created with copilot
 
 	if (!data) {
 		return <CircularProgress />;
@@ -175,4 +172,4 @@ export default function MathGradesChart() {
 			</Stack>
 		</Paper>
 	);
-} // debugged button and created line visibility functionaility with Copilot
+}

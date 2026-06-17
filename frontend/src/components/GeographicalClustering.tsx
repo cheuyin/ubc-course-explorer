@@ -45,7 +45,6 @@ const ubcCoords = [-123.2456, 49.2662];
 const centreCoords: Coordinate = fromLonLat(ubcCoords);
 
 const MAP = "map" as const;
-// debugged below code w/ copilot and used copilot to generate tooltip func
 const MapPlot: React.FC = () => {
 	const tooltipRef = useRef<HTMLDivElement>(null);
 	useEffect(() => {
@@ -120,5 +119,4 @@ const MapPlot: React.FC = () => {
 		</Paper>
 	);
 };
-// above debugged with copilot
 export default MapPlot;

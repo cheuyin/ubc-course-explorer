@@ -20,11 +20,9 @@ export class BuildingRoomRepository {
 		await this.store.writeCollection("buildings", buildings);
 	}
 
-	// Below code written by Gemini - Add a synchronization method to Model.ts
 	public async persistToDisk(): Promise<void> {
 		await this.writeData(this.data.buildings);
 	}
-	// above code written by gemini
 
 	public async getBuildings(): Promise<Building[]> {
 		this.data.buildings = await this.readData();

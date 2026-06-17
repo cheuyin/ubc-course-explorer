@@ -3,16 +3,11 @@ import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
 import { StatusCodes } from "http-status-codes";
 import { createRoomService, deleteRoomService, listRoomService, listRoomsService } from "../services/roomServices";
 
-// below code written with Copilot - note that function def'ns were rewritten with copilot during refactor
 export const listRooms =
 	(repo: BuildingRoomRepository) =>
 	async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-		// below code written with Copilot
-
 		const limit = req.query.limit ? Number(req.query.limit as string) : 100;
 		const offset = req.query.offset ? Number(req.query.offset as string) : 0;
-
-		// above code written with Copilot
 
 		try {
 			const response = await listRoomsService({

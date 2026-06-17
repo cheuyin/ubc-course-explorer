@@ -3,14 +3,12 @@ import { CourseSectionRepository } from "../repositories/courseSectionRepository
 import { Course } from "../models/course";
 import { type Request, type Response } from "express";
 
-// code below written with Gemini
 export function sendNotFound(res: Response, id: string, obj: string): void {
 	res.status(StatusCodes.NOT_FOUND).send({
 		error: "Not found",
 		message: "no " + obj + " with id '" + id + "'",
 	});
 }
-// code above written with Gemini
 
 export function validateQuery(limit: number, offset: number, errors: any): any {
 	const max = 5000;
@@ -41,12 +39,8 @@ export async function listCourses(req: Request, res: Response, repo: CourseSecti
 		params: {},
 	};
 
-	// below code written with Copilot
-
 	const limit = req.query.limit ? Number(req.query.limit as string) : 100;
 	const offset = req.query.offset ? Number(req.query.offset as string) : 0;
-
-	// above code written with Copilot
 
 	if (validateQuery(limit, offset, errors)) {
 		res.status(StatusCodes.BAD_REQUEST).send(errors);
@@ -75,7 +69,6 @@ export async function listCourses(req: Request, res: Response, repo: CourseSecti
 	};
 	res.status(StatusCodes.OK).send(body);
 }
-// written with Gemini below
 function validateCourseBody(req: Request, fields: any): any {
 	["title", "dept", "code"].forEach((key) => {
 		if (!(key in req.body)) {
@@ -99,7 +92,6 @@ function formatCourseResponse(course: Course, url: string): {} {
 		},
 	};
 }
-// written with Gemini above
 
 export async function createCourse(req: Request, res: Response, repo: CourseSectionRepository): Promise<void> {
 	const errors = {

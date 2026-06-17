@@ -2,7 +2,6 @@ import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
 import { ValidationError, BadRequestError, NotFoundError, objectType } from "./errorTypes";
 import type { NextFunction, Request, Response } from "express";
 
-// function written using Copilot
 export function validateBuildingBody(req: Request, res: Response, next: NextFunction): any {
 	// Required fields
 	const body = req.body;
@@ -59,7 +58,6 @@ export function validateQuery(req: Request, res: Response, next: NextFunction): 
 	next();
 }
 
-// written using function written by Copilot as reference
 export function validateRoomBody(req: Request, res: Response, next: NextFunction): any {
 	const requiredKeys = ["building", "number", "type", "furniture", "href"] as const;
 	const body = req.body;
