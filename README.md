@@ -11,8 +11,15 @@ A full-stack data visualization tool for exploring UBC course and campus facilit
 
 ## Tech stack
 
-**Backend:** Node.js, Express, TypeScript  
-**Frontend:** React 19, TypeScript, Vite, Material UI, D3, Recharts, OpenLayers
+**Backend** ([backend/](backend/)): Node.js, Express, TypeScript  
+**Frontend** ([frontend/](frontend/)): React 19, TypeScript, Vite, Material UI, D3, Recharts, OpenLayers
+
+## Project layout
+
+```
+backend/    Express + TypeScript API (controllers, services, repositories)
+frontend/   React + Vite single-page app
+```
 
 ## Getting started
 
@@ -24,29 +31,26 @@ A full-stack data visualization tool for exploring UBC course and campus facilit
 ### Install dependencies
 
 ```bash
-yarn install
-cd frontend && yarn install
+cd backend && yarn install
+cd ../frontend && yarn install
 ```
 
 ### Run in development
 
 ```bash
-# From the frontend/ directory — starts both Vite dev server and backend
+# From frontend/ — starts both the Vite dev server and the backend
 yarn dev
 ```
 
 ### Build
 
 ```bash
-# Backend
-yarn build
-
-# Frontend
-cd frontend && yarn build
+cd backend && yarn build
+cd ../frontend && yarn build
 ```
 
 ### Run tests
 
 ```bash
-yarn test
+cd backend && yarn test
 ```

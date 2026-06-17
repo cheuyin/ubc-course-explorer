@@ -54,7 +54,7 @@ export async function createApp(config: AppConfig): Promise<Application> {
 	};
 
 	await fs.mkdir(config.datadir, { recursive: true });
-	app.use(express.static("frontend/public"));
+	app.use(express.static("../frontend/public"));
 	app.use(express.json());
 	app.use(express.raw({ type: "application/*", limit: "10mb" }));
 	app.use(cors());

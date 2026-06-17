@@ -10,7 +10,7 @@ dist/
 .yarn/
 
 # Persist Dir
-/data/
+/backend/data/
 /frontend/demo_data/
 
 # Frontend build output
@@ -26,4 +26,4 @@ dist/
 api-spec.json
 test.http
 *.zip
-!test/test_data/*
+!backend/test/test_data/*

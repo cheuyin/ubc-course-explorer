@@ -11,7 +11,7 @@
 	},
 	"json.schemas": [
 		{
-			"fileMatch": ["/test/queries/**"]
+			"fileMatch": ["/backend/test/queries/**"]
 		}
 	],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -19,6 +19,6 @@
 	"eslint.problems.shortenToSingleLine": true,
 	"eslint.run": "onSave",
 	"prettier.useTabs": true,
-	"mochaExplorer.files": "test/**/*.spec.ts",
+	"mochaExplorer.files": "backend/test/**/*.spec.ts",
 	"mochaExplorer.require": "ts-node/register"
 }

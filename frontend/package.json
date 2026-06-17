@@ -7,8 +7,8 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"backend": "cross-env DATA_DIR=frontend/demo_data yarn --cwd .. start",
-		"demo": "yarn build && cross-env DATA_DIR=frontend/demo_data yarn --cwd .. start",
+		"backend": "cross-env DATA_DIR=../frontend/demo_data yarn --cwd ../backend start",
+		"demo": "yarn build && cross-env DATA_DIR=../frontend/demo_data yarn --cwd ../backend start",
 		"dev": "concurrently \"vite\" \"yarn backend\""
 	},
 	"dependencies": {
