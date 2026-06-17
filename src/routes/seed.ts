@@ -11,7 +11,7 @@ export function seedRoutes(repos: Repositories, store: Store): Router {
 
 	r.get("/", async (_req, res) => {
 		try {
-			const seedDir = path.join(process.cwd(), "src", "data");
+			const seedDir = path.join(process.cwd(), "seed");
 
 			// below by Claude
 			const [courseRaw, buildingRaw] = await Promise.all([

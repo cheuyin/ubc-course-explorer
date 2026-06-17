@@ -1,5 +1,5 @@
 import { StatusCodes } from "http-status-codes";
-import { BadRequestError, InternalServerError, NotFoundError, ValidationError } from "./ErrorTypes";
+import { BadRequestError, InternalServerError, NotFoundError, ValidationError } from "./errorTypes";
 import type { NextFunction, Request, Response } from "express";
 
 export function handleErrors(err: unknown, req: Request, res: Response, next: NextFunction): void {

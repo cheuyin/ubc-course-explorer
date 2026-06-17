@@ -6,7 +6,7 @@ import {
 	deleteBuildingService,
 	listBuildingService,
 	listBuildingsService,
-} from "../services/resources/buildingServices";
+} from "../services/buildingServices";
 
 // below code written with Copilot - note that function def'ns were rewritten with copilot during refactor
 export const listBuildings =

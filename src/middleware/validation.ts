@@ -1,5 +1,5 @@
 import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
-import { ValidationError, BadRequestError, NotFoundError, objectType } from "./ErrorTypes";
+import { ValidationError, BadRequestError, NotFoundError, objectType } from "./errorTypes";
 import type { NextFunction, Request, Response } from "express";
 
 // function written using Copilot

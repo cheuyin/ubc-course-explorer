@@ -1,12 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
 import { StatusCodes } from "http-status-codes";
-import {
-	createRoomService,
-	deleteRoomService,
-	listRoomService,
-	listRoomsService,
-} from "../services/resources/roomServices";
+import { createRoomService, deleteRoomService, listRoomService, listRoomsService } from "../services/roomServices";
 
 // below code written with Copilot - note that function def'ns were rewritten with copilot during refactor
 export const listRooms =

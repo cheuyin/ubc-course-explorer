@@ -1,5 +1,5 @@
-import { NotFoundError, objectType } from "../../middleware/ErrorTypes";
-import { BuildingRoomRepository } from "../../repositories/buildingRoomRepository";
+import { NotFoundError, objectType } from "../middleware/errorTypes";
+import { BuildingRoomRepository } from "../repositories/buildingRoomRepository";
 
 interface ListRoomsInput {
 	limit: number;
