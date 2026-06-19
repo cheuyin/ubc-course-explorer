@@ -6,6 +6,8 @@ import CourseDetail from "./pages/CourseDetail";
 import Departments from "./pages/Departments";
 import DepartmentDetail from "./pages/DepartmentDetail";
 import InstructorDetail from "./pages/InstructorDetail";
+import Campus from "./pages/Campus";
+import BuildingDetail from "./pages/BuildingDetail";
 
 const router = createBrowserRouter([
 	{
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
 			{ path: "departments", element: <Departments /> },
 			{ path: "departments/:dept", element: <DepartmentDetail /> },
 			{ path: "instructors/:name", element: <InstructorDetail /> },
+			{ path: "campus", element: <Campus /> },
+			{ path: "campus/:buildingId", element: <BuildingDetail /> },
 		],
 	},
 ]);

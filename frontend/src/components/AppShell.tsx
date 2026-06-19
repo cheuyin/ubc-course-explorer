@@ -59,6 +59,7 @@ export default function AppShell() {
 					<nav className="hidden items-center gap-1 sm:flex">
 						<NavItem to="/search">Courses</NavItem>
 						<NavItem to="/departments">Departments</NavItem>
+						<NavItem to="/campus">Campus</NavItem>
 					</nav>
 					<ThemeToggle />
 				</div>
