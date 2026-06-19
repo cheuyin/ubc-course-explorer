@@ -59,7 +59,7 @@ export default function CourseDetail() {
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbLink render={<RouterLink to={`/search?dept=${c.dept}`} />}>
+						<BreadcrumbLink render={<RouterLink to={`/departments/${c.dept}`} />}>
 							{c.dept.toUpperCase()}
 						</BreadcrumbLink>
 					</BreadcrumbItem>

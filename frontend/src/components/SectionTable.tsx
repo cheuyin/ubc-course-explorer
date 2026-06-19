@@ -1,3 +1,4 @@
+import { Link as RouterLink } from "react-router-dom";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import type { Section } from "@/types";
 
@@ -21,7 +22,18 @@ export default function SectionTable({ sections }: { sections: Section[] }) {
 					{rows.map((s) => (
 						<TableRow key={s.id}>
 							<TableCell>{s.year === 1900 ? "Overall" : s.year}</TableCell>
-							<TableCell>{s.instructor || "—"}</TableCell>
+							<TableCell>
+								{s.instructor ? (
+									<RouterLink
+										to={`/instructors/${encodeURIComponent(s.instructor)}`}
+										className="text-primary hover:underline"
+									>
+										{s.instructor}
+									</RouterLink>
+								) : (
+									"—"
+								)}
+							</TableCell>
 							<TableCell className="text-right">{s.avg}</TableCell>
 							<TableCell className="text-right">{s.pass}</TableCell>
 							<TableCell className="text-right">{s.fail}</TableCell>

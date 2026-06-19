@@ -28,7 +28,7 @@ export default function Departments() {
 							<TableRow
 								key={d.dept}
 								className="cursor-pointer"
-								onClick={() => navigate(`/search?dept=${encodeURIComponent(d.dept)}`)}
+								onClick={() => navigate(`/departments/${encodeURIComponent(d.dept)}`)}
 							>
 								<TableCell className="font-semibold uppercase">{d.dept}</TableCell>
 								<TableCell className="text-right">{d.courseCount}</TableCell>
