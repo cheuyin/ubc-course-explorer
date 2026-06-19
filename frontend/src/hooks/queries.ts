@@ -5,10 +5,11 @@ import {
 	fetchDepartments,
 	fetchDepartmentCourses,
 	searchInstructorOfferings,
+	searchRooms,
 	type CourseSearchFilters,
 	type Order,
 } from "../api/search";
-import type { Course, Section } from "../types";
+import type { Building, BuildingRoom, Course, Section } from "../types";
 
 /** One-time database seed. Gates the app until data is available. */
 export function useSeed() {
@@ -66,6 +67,48 @@ export function useCourse(courseId: string | undefined) {
 			return res.data;
 		},
 		enabled: !!courseId,
+	});
+}
+
+export function useBuildings() {
+	return useQuery({
+		queryKey: ["buildings"],
+		queryFn: async (): Promise<Building[]> => {
+			const res = await api.get("/v2/buildings", { params: { limit: 5000 } });
+			return res.data.items as Building[];
+		},
+		staleTime: 5 * 60 * 1000,
+	});
+}
+
+export function useBuilding(buildingId: string | undefined) {
+	return useQuery({
+		queryKey: ["building", buildingId],
+		queryFn: async (): Promise<Building> => {
+			const res = await api.get(`/v2/buildings/${buildingId}`);
+			return res.data as Building;
+		},
+		enabled: !!buildingId,
+	});
+}
+
+export function useBuildingRooms(buildingId: string | undefined) {
+	return useQuery({
+		queryKey: ["buildingRooms", buildingId],
+		queryFn: async (): Promise<BuildingRoom[]> => {
+			const res = await api.get(`/v2/buildings/${buildingId}/rooms`, { params: { limit: 5000 } });
+			return res.data.items as BuildingRoom[];
+		},
+		enabled: !!buildingId,
+	});
+}
+
+/** Every room across campus (364 in the demo set — well under the search cap). */
+export function useRooms() {
+	return useQuery({
+		queryKey: ["rooms"],
+		queryFn: () => searchRooms({}),
+		staleTime: 5 * 60 * 1000,
 	});
 }
 

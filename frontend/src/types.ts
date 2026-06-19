@@ -33,12 +33,13 @@ export interface Building {
 	};
 }
 
-export interface Room {
+/** A room as returned by GET /v2/buildings/:id/rooms (note: flat field names). */
+export interface BuildingRoom {
 	id: string;
-	buildingId: string;
-	roomNumber: string;
-	roomType: string;
-	furnitureType: string;
+	building: string;
+	number: string;
+	type: string;
+	furniture: string;
 	href: string;
 	seats: number;
 }
