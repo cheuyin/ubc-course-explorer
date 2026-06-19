@@ -6,44 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useCourseSearch } from "@/hooks/queries";
-import type { CourseSearchFilters, CourseRow } from "@/api/search";
+import { groupOfferingsByCourse, type CourseSearchFilters } from "@/api/search";
 import { courseIdOf } from "@/types";
 import { LoadingState, ErrorState, EmptyState } from "@/components/feedback";
-
-interface CourseGroup {
-	dept: string;
-	code: string;
-	title: string;
-	offerings: number;
-	avg: number;
-	latestYear: number;
-}
-
-/** Collapse section rows into one entry per distinct course. */
-function groupByCourse(rows: CourseRow[]): CourseGroup[] {
-	const map = new Map<string, { dept: string; code: string; title: string; sumAvg: number; n: number; latestYear: number }>();
-	for (const r of rows) {
-		const key = `${r.dept}${r.code}`;
-		const cur = map.get(key);
-		if (cur) {
-			cur.sumAvg += r.avg;
-			cur.n += 1;
-			cur.latestYear = Math.max(cur.latestYear, r.year);
-		} else {
-			map.set(key, { dept: r.dept, code: r.code, title: r.title, sumAvg: r.avg, n: 1, latestYear: r.year });
-		}
-	}
-	return [...map.values()]
-		.map((g) => ({
-			dept: g.dept,
-			code: g.code,
-			title: g.title,
-			offerings: g.n,
-			avg: Number((g.sumAvg / g.n).toFixed(2)),
-			latestYear: g.latestYear,
-		}))
-		.sort((a, b) => a.dept.localeCompare(b.dept) || a.code.localeCompare(b.code));
-}
 
 // Read the editable filter fields out of the URL.
 function paramsToFilters(sp: URLSearchParams): CourseSearchFilters {
@@ -116,7 +81,7 @@ export default function SearchResults() {
 	// Only run a search once at least one filter is set.
 	const hasFilters = Object.values(filters).some((v) => v !== undefined && v !== "");
 	const { data, isLoading, isError, error, isFetching } = useCourseSearch(filters, "dept", hasFilters);
-	const courses = useMemo(() => groupByCourse(data ?? []), [data]);
+	const courses = useMemo(() => groupOfferingsByCourse(data ?? []), [data]);
 
 	const [page, setPage] = useState(0);
 

@@ -116,6 +116,81 @@ export function searchCourseOfferings(f: CourseSearchFilters, order: Order = "de
 	});
 }
 
+// ===== Grouping offerings into courses =====
+
+export interface CourseGroup {
+	dept: string;
+	code: string;
+	title: string;
+	offerings: number;
+	avg: number;
+	latestYear: number;
+}
+
+/** Collapse section/offering rows into one entry per distinct course. */
+export function groupOfferingsByCourse(
+	rows: { dept: string; code: string; title: string; year: number; avg: number }[]
+): CourseGroup[] {
+	const map = new Map<string, { dept: string; code: string; title: string; sumAvg: number; n: number; latestYear: number }>();
+	for (const r of rows) {
+		const key = `${r.dept}${r.code}`;
+		const cur = map.get(key);
+		if (cur) {
+			cur.sumAvg += r.avg;
+			cur.n += 1;
+			cur.latestYear = Math.max(cur.latestYear, r.year);
+		} else {
+			map.set(key, { dept: r.dept, code: r.code, title: r.title, sumAvg: r.avg, n: 1, latestYear: r.year });
+		}
+	}
+	return [...map.values()]
+		.map((g) => ({
+			dept: g.dept,
+			code: g.code,
+			title: g.title,
+			offerings: g.n,
+			avg: Number((g.sumAvg / g.n).toFixed(2)),
+			latestYear: g.latestYear,
+		}))
+		.sort((a, b) => a.dept.localeCompare(b.dept) || a.code.localeCompare(b.code));
+}
+
+/** All courses in a department, grouped from its (dept-scoped) offerings. */
+export async function fetchDepartmentCourses(dept: string): Promise<CourseGroup[]> {
+	const rows = await searchCourseOfferings({ dept }, "code");
+	return groupOfferingsByCourse(rows);
+}
+
+// ===== Instructors =====
+
+export interface InstructorOfferingRow extends SearchRow {
+	dept: string;
+	code: string;
+	title: string;
+	year: number;
+	avg: number;
+	pass: number;
+	fail: number;
+}
+
+/**
+ * All offerings taught by an instructor. The WHERE is scoped to the (exact)
+ * instructor name, keeping the matched-row count well under the 5000-row cap so
+ * we can derive both their course list and a year-by-year trend client-side.
+ */
+export async function searchInstructorOfferings(name: string): Promise<InstructorOfferingRow[]> {
+	return search<InstructorOfferingRow>({
+		kind: "course_offerings",
+		query: {
+			WHERE: equals("instructor", name),
+			OPTIONS: {
+				COLUMNS: ["dept", "code", "title", "year", "avg", "pass", "fail"],
+				ORDER: "year",
+			},
+		},
+	});
+}
+
 // ===== Departments =====
 
 export interface DeptRow {

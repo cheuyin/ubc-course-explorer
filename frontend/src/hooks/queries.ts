@@ -3,6 +3,8 @@ import api from "../api/axios";
 import {
 	searchCourseOfferings,
 	fetchDepartments,
+	fetchDepartmentCourses,
+	searchInstructorOfferings,
 	type CourseSearchFilters,
 	type Order,
 } from "../api/search";
@@ -26,6 +28,24 @@ export function useDepartments() {
 		queryKey: ["departments"],
 		queryFn: () => fetchDepartments(),
 		staleTime: 5 * 60 * 1000,
+	});
+}
+
+export function useDepartmentCourses(dept: string | undefined) {
+	return useQuery({
+		queryKey: ["departmentCourses", dept],
+		queryFn: () => fetchDepartmentCourses(dept!),
+		enabled: !!dept,
+		staleTime: 60 * 1000,
+	});
+}
+
+export function useInstructorOfferings(name: string | undefined) {
+	return useQuery({
+		queryKey: ["instructorOfferings", name],
+		queryFn: () => searchInstructorOfferings(name!),
+		enabled: !!name,
+		staleTime: 60 * 1000,
 	});
 }
 
