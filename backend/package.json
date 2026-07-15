@@ -46,7 +46,7 @@
 		"cover": "nyc --reporter text --reporter html yarn run test",
 		"build": "tsc && yarn prettier:check",
 		"build:lint": "tsc && yarn prettier:check && yarn lint:check",
-		"render:build": "cd ../frontend && yarn install && yarn build && cd ../backend && yarn build",
+		"render:build": "yarn install && cd ../frontend && yarn install && yarn build && cd ../backend && yarn build",
 		"test": "mocha --require ts-node/register --timeout 10000 --extension .spec.ts --recursive test",
 		"lint:check": "eslint src test --ext .ts",
 		"lint:fix": "eslint src test --ext .ts --fix",
