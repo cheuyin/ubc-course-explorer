@@ -2,6 +2,30 @@
 
 A full-stack data visualization tool for exploring UBC course and campus facilities data.
 
+## Screenshots
+
+<table>
+	<tr>
+		<td align="center" width="33%">
+			<img src="./readme_assets/home_page.png" alt="Home page" width="100%" />
+			<br />
+			<sub><strong>Home page</strong></sub>
+		</td>
+		<td align="center" width="33%">
+			<img src="./readme_assets/course_search.png" alt="Course search results" width="100%" />
+			<br />
+			<sub><strong>Course search</strong></sub>
+		</td>
+		<td align="center" width="33%">
+			<img src="./readme_assets/section_page.png" alt="Course section page" width="100%" />
+			<br />
+			<sub><strong>Section page</strong></sub>
+		</td>
+	</tr>
+</table>
+
+The screenshots above show the main entry point, search experience, and a detailed section view.
+
 ## Features
 
 - **Course enrollment trends** — bar chart of enrollment across departments
