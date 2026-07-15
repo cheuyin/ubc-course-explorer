@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import path from "path";
 import express from "express";
 import cors from "cors";
 import { CourseSectionRepository } from "./repositories/courseSectionRepository";
@@ -42,6 +43,8 @@ export type AppConfig = {
  */
 export async function createApp(config: AppConfig): Promise<Application> {
 	const app = express();
+	const staticDir = path.resolve(process.cwd(), "../frontend/public");
+	const indexFile = path.join(staticDir, "index.html");
 
 	const store = createFileStore(config.datadir);
 
@@ -51,7 +54,7 @@ export async function createApp(config: AppConfig): Promise<Application> {
 	};
 
 	await fs.mkdir(config.datadir, { recursive: true });
-	app.use(express.static("../frontend/public"));
+	app.use(express.static(staticDir));
 	app.use(express.json());
 	app.use(express.raw({ type: "application/*", limit: "10mb" }));
 	app.use(cors());
@@ -71,6 +74,15 @@ export async function createApp(config: AppConfig): Promise<Application> {
 
 	app.get("/api", (req, res) => {
 		res.send("App is running!");
+	});
+
+	app.use((req, res, next) => {
+		if (req.method !== "GET" || req.path.startsWith("/api")) {
+			next();
+			return;
+		}
+
+		res.sendFile(indexFile);
 	});
 
 	return app;

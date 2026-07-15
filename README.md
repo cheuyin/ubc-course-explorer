@@ -54,3 +54,15 @@ cd ../frontend && yarn build
 ```bash
 cd backend && yarn test
 ```
+
+## Deploying on Render
+
+Use a single Render web service created from the Render dashboard.
+
+- Root directory: `backend`
+- Build command: `yarn render:build`
+- Start command: `yarn start:prod`
+- Add a persistent disk mounted at `/var/data`
+- Set `DATA_DIR=/var/data`
+
+No `render.yaml` is needed for the manual setup.

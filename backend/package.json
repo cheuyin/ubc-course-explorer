@@ -46,11 +46,13 @@
 		"cover": "nyc --reporter text --reporter html yarn run test",
 		"build": "tsc && yarn prettier:check",
 		"build:lint": "tsc && yarn prettier:check && yarn lint:check",
+		"render:build": "cd ../frontend && yarn install && yarn build && cd ../backend && yarn build",
 		"test": "mocha --require ts-node/register --timeout 10000 --extension .spec.ts --recursive test",
 		"lint:check": "eslint src test --ext .ts",
 		"lint:fix": "eslint src test --ext .ts --fix",
 		"prettier:check": "prettier --check \"src/**/*.ts\" \"test/**/*.ts\"",
 		"prettier:fix": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-		"start": "ts-node src/index.ts"
+		"start": "ts-node src/index.ts",
+		"start:prod": "node dist/src/index.js"
 	}
 }
