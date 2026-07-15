@@ -66,3 +66,5 @@ Use a single Render web service created from the Render dashboard.
 - Set `DATA_DIR=/var/data`
 
 No `render.yaml` is needed for the manual setup.
+
+If you see TypeScript errors about missing `it` or `@tsconfig/node24`, Render is building without the backend devDependencies. Double-check that the service root is `backend`.
